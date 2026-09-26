@@ -1,6 +1,7 @@
 PYTHON ?= python3
+PORT ?= 8765
 
-.PHONY: check test preview release
+.PHONY: check test preview release viewer
 
 check:
 	$(PYTHON) tools/project.py check
@@ -13,3 +14,6 @@ preview: check test
 
 release: test
 	$(PYTHON) tools/project.py package --release
+
+viewer:
+	$(PYTHON) tools/viewer.py --port $(PORT)

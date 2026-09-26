@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Animation Skills · 案例查看器</title>
+  <link rel="stylesheet" href="/viewer/style.css">
+  <script type="importmap">
+    {"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="Animation Skills 首页"><span class="brand-mark">A</span>Animation Skills</a>
+    <span class="header-divider"></span><span class="header-title">案例查看器</span>
+    <span class="local-label">本地预览</span>
+  </header>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="制作案例">
+      <div class="sidebar-heading"><h2>制作案例</h2><span id="case-count">—</span></div>
+      <input id="search" type="search" placeholder="搜索案例" aria-label="搜索案例">
+      <nav id="case-list" aria-label="案例列表"><p class="muted">正在读取案例……</p></nav>
+      <div class="sidebar-note"><span class="status-dot"></span><p>作品评价与演示分开记录。<br>播放成功不表示评测通过。</p></div>
+    </aside>
+    <main>
+      <div id="app-error" class="error-banner" role="alert" hidden></div>
+      <section class="case-heading" aria-labelledby="case-title">
+        <div>
+          <div class="case-meta"><span id="skill-name">角色动画</span><span id="case-split">开发案例</span></div>
+          <h1 id="case-title">正在读取案例</h1>
+          <p id="case-spec" class="muted"></p>
+        </div>
+        <span id="production-status" class="status-tag">待制作</span>
+      </section>
+      <div class="workspace-toolbar">
+        <div class="button-group" aria-label="镜头">
+          <button data-camera="perspective" class="selected" aria-pressed="true">透视</button>
+          <button data-camera="front" aria-pressed="false">正面</button>
+          <button data-camera="side" aria-pressed="false">侧面</button>
+        </div>
+        <label class="check-control"><input id="skeleton" type="checkbox">骨架</label>
+        <label class="check-control"><input id="props" type="checkbox" checked>任务布景</label>
+        <button id="compare" class="quiet-button" aria-pressed="false">双视图</button>
+      </div>
+      <div id="viewports" class="viewports">
+        <section class="viewport" id="viewport-a" aria-label="视图 A">
+          <div class="viewport-toolbar">
+            <span class="view-letter">A</span>
+            <select class="model-select" aria-label="视图 A 素材"></select>
+            <label class="file-button" title="仅在浏览器中读取，不上传文件">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 A 载入本地 GLB"></label>
+          </div>
+          <div class="canvas-wrap">
+            <canvas aria-label="视图 A 三维角色"></canvas>
+            <div class="canvas-status" role="status">正在加载模型……</div>
+            <span class="view-origin">源素材</span>
+            <span class="axis-label">Y ↑</span>
+          </div>
+          <div class="clip-toolbar"><label>动作<select class="clip-select" aria-label="视图 A 动作"><option value="">绑定姿势</option></select></label><span class="clip-duration"></span></div>
+        </section>
+        <section class="viewport" id="viewport-b" aria-label="视图 B" hidden>
+          <div class="viewport-toolbar">
+            <span class="view-letter">B</span>
+            <select class="model-select" aria-label="视图 B 素材"></select>
+            <label class="file-button" title="仅在浏览器中读取，不上传文件">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 B 载入本地 GLB"></label>
+          </div>
+          <div class="canvas-wrap">
+            <canvas aria-label="视图 B 三维角色"></canvas>
+            <div class="canvas-status" role="status">正在加载模型……</div>
+            <span class="view-origin">源素材</span>
+            <span class="axis-label">Y ↑</span>
+          </div>
+          <div class="clip-toolbar"><label>动作<select class="clip-select" aria-label="视图 B 动作"><option value="">绑定姿势</option></select></label><span class="clip-duration"></span></div>
+        </section>
+      </div>
+      <div class="playback">
+        <button id="play" class="play-button" aria-label="播放" title="播放 / 暂停（空格）" disabled>
+          <svg class="play-icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3L15 9L5 15Z" fill="currentColor"/></svg>
+          <svg class="pause-icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 3H7V15H4ZM11 3H14V15H11Z" fill="currentColor"/></svg>
+        </button>
+        <button id="step" class="step-button" title="前进一帧" aria-label="前进一帧" disabled><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3L12 9L3 15ZM13 3H15V15H13Z" fill="currentColor"/></svg></button>
+        <output id="time">0.00 / 0.00 s</output>
+        <input id="timeline" type="range" min="0" max="1" step="0.001" value="0" aria-label="播放进度" disabled>
+        <select id="speed" aria-label="播放速度"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        <label class="check-control loop-control"><input id="loop" type="checkbox" checked>循环</label>
+      </div>
+      <div class="viewer-notes"><p id="source-note">当前演示固定输入，案例动作尚未制作。</p><span>拖拽旋转 · 滚轮缩放</span></div>
+      <details class="task-details">
+        <summary>任务要求与评价标准<span>查看完整制作要求</span></summary>
+        <p id="task-prompt"></p>
+        <div class="criteria-grid"><section><h3>正确性</h3><ul id="correctness"></ul></section><section><h3>表现力</h3><ul id="taste"></ul></section></div>
+      </details>
+    </main>
+  </div>
+  <script type="module" src="/viewer/app.js"></script>
+</body>
+</html>

@@ -26,6 +26,7 @@ templates/         运行记录与经验记录模板
 docs/              制作、评测和发布说明
 tools/             检查、输入准备和打包工具
 tests/             工程工具的回归检查
+viewer/            Three.js 案例查看器
 .artifacts/        本地模型、工程和视频，不提交 Git
 dist/              发布包，不提交 Git
 ```
@@ -51,6 +52,28 @@ python3 tools/project.py prepare walk-turn-stop .artifacts/work/walk-turn-stop
 ```
 
 准备目录只包含任务要求和固定输入，不包含修正版、评价记录或经验答案。首次使用前需按资产清单准备文件；参见 [工程约定](docs/engineering.md)。
+
+## Three.js 查看器
+
+首次使用需安装 Node.js 与 npm。在仓库根目录执行：
+
+```bash
+npm ci
+make viewer
+```
+
+打开 `http://127.0.0.1:8765`。可用 `make viewer PORT=8766` 更换端口，用 `Ctrl+C` 停止服务。查看器依赖锁定的 Three.js 版本；安装后无需外部 CDN。
+
+- 切换 9 个案例，查看任务尺寸对应的静态布景、制作要求与评价标准。
+- 播放 GLB 动画，支持暂停、逐帧、进度拖动、倍速、循环、正侧视图和骨架。
+- 开启双视图，按同一秒数比较两个片段；较短片段停在末帧。
+- 通过“载入 GLB”查看本地文件；文件只在浏览器中读取，不上传或写入运行记录。
+
+当前案例尚无制作产物。默认显示固定角色的源动作：Idle 2 秒、Walk 1 秒、Chop 0.8 秒。源动作与静态布景不表示案例已完成，也不是任务要求的完整动画。角色输入按 case 身高居中显示；已制作的导出物保留原始单位和根位移。
+
+后续在运行记录的 `initial.artifacts` 或 `corrected.artifacts` 中登记 `role=export` 的 GLB、路径及 SHA-256，刷新页面即可从素材列表选择。缺失或哈希不一致的文件不会加载。评价标签来自运行记录，临时导入文件始终显示“未登记评价”。
+
+本地服务只提供查看器、Three.js 和清单内可核对的 GLB，不提供仓库目录浏览。查看器不进入 Skill ZIP，Python 工程命令也不依赖 npm。
 
 ## 制作与完善
 
