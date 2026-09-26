@@ -1,0 +1,35 @@
+{
+  "id": "lift-heavy-box",
+  "skill": "character-prop-interaction",
+  "split": "development",
+  "title": "双手搬起重箱并放上台面",
+  "prompt": "使用固定角色，从静止姿势制作 8 秒动作：双手抓住面前木箱，将它从地面搬起，移到相邻台面并放稳，松手。箱子表现为需要全身发力的重物，不要求刚体模拟。禁止复用原动作或成品动画。保留角色绑定，可增加控制器；箱与台面用 Blender 几何制作。交付可编辑工程、同时包含角色与道具动画的 GLB、全身和握持近景原速视频。无手指骨时用掌部接触表达抓握并标明限制。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，初始面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "props": [
+      {"name": "box", "dimensions": [0.55, 0.4, 0.4], "center": [0, 0.5, 0.2], "intended_mass_kg": 20},
+      {"name": "table", "top_dimensions": [0.9, 0.65, 0.08], "top_z": 0.75, "center_xy": [0.9, 0.5]}
+    ]
+  },
+  "duration_seconds": 8,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，包含箱体全路径。", "auxiliary": ["双手与箱体近景", "侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "grip.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "grip", "description": "持握期间手掌与箱体接触稳定，没有明显穿物、伸长或切换跳变。"},
+      {"id": "support", "description": "箱体先被抓住后离地，先在台面稳定后松手；角色脚部支撑连续。"},
+      {"id": "export", "description": "重新导入 GLB 后箱体与角色同步，约束结果已烘焙。"}
+    ],
+    "taste": [
+      {"id": "weight", "description": "准备、发力、移动和卸载清楚；重量影响骨盆与胸腔，不只有手臂运动。"},
+      {"id": "clarity", "description": "姿势轮廓和节奏清楚，动作经济，放下有控制。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

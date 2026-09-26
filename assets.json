@@ -1,0 +1,12 @@
+{
+  "survivor-rig-glb": {
+    "path": ".artifacts/inputs/survivor-rig.glb",
+    "sha256": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd",
+    "source": "本工作区已有 winter-survival/public/models/survivor-rig.glb 的逐字节副本，Meshy 角色及绑定。17 根骨骼，含 Idle、Walk、Chop。输入是历史生成物；未重新调用 Meshy，生成模型版本与完整参数未知。仅作为固定研发输入，不随 Skill 分发。换机器须从原项目或其素材归档恢复并核对哈希。"
+  },
+  "survivor-rig-blend": {
+    "path": ".artifacts/inputs/survivor-rig.blend",
+    "sha256": "9e3d7c9f45c91dd7581d60f6b92d3cea58d095aedde4c024cb31820974784fe0",
+    "source": "本工作区已有 winter-survival/references/meshy/survivor-rig.blend 的逐字节副本。保留用于来源对照；初始 case 只使用 GLB，不能用此工程中的历史动作替代从固定输入制作。历史作品尚无本工程接受评价。"
+  }
+}

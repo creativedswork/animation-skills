@@ -1,0 +1,32 @@
+{
+  "id": null,
+  "case": null,
+  "status": "recording",
+  "fingerprints": {"case": null, "skills": {}, "inputs": {}},
+  "environment": {
+    "model": null,
+    "harness": null,
+    "blender": null,
+    "budget": null,
+    "usage": null
+  },
+  "execution": {
+    "from_raw_inputs": null,
+    "human_artifact_edits": null,
+    "human_extra_guidance": null,
+    "notes": null
+  },
+  "initial": {
+    "artifacts": [],
+    "review": {
+      "verdict": "pending",
+      "reviewer": null,
+      "correctness": {},
+      "taste": {},
+      "remaining_issues": []
+    }
+  },
+  "changes": [],
+  "corrected": null,
+  "lessons": []
+}

@@ -1,0 +1,13 @@
+{
+  "id": null,
+  "status": "candidate",
+  "skill": null,
+  "source": {"case": null, "run": null},
+  "observation": null,
+  "effective_change": null,
+  "applies_when": null,
+  "limits": null,
+  "targets": [],
+  "validated_skill_sha256": null,
+  "transfer_evidence": []
+}

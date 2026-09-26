@@ -1,0 +1,32 @@
+{
+  "id": "low-seat-transfer",
+  "skill": "character-body-mechanics",
+  "split": "transfer",
+  "title": "迁移：从低凳起身并迈出一步",
+  "prompt": "从固定原始角色输入重新制作 6 秒动作：角色先坐在低凳上，不借助手臂起立，向 +Y 迈出一步并站稳。座面比普通凳低，需要按角色比例选择支撑和发力方式。禁止读取其他 case 的初稿、修正版、评价或经验记录，禁止复用任何成品关键帧。允许读取本次被评测的 Skill 包。保留原绑定，可添加控制器。交付工程、含根位移及低凳 GLB、主镜头与侧面原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，地面 z=0；记录变换。",
+    "ground_z": 0,
+    "props": [{"name": "low-seat", "seat_dimensions": [0.65, 0.4, 0.06], "seat_top_z": 0.32, "seat_center_xy": [0, 0]}],
+    "start": "臀部自然接触座面，双脚触地，允许按腿长设置脚位置并记录。"
+  },
+  "duration_seconds": 6,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，包含低凳和迈步。", "auxiliary": ["侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "support", "description": "离座前后支撑可信，迈步前释放正确的脚；无穿凳、滑步或膝盖翻转。"},
+      {"id": "export", "description": "重新导入 GLB 后低凳接触、根位移及动作时序一致。"}
+    ],
+    "taste": [
+      {"id": "adaptation", "description": "低座起身的前倾与发力清楚，起立到迈步连接自然。"},
+      {"id": "settle", "description": "停稳有控制，胸腔跟随克制，动作没有均匀机械节奏。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

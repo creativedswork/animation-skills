@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-dev.1",
+  "skills": [
+    {"name": "character-body-mechanics", "maturity": "draft"},
+    {"name": "character-prop-interaction", "maturity": "draft"},
+    {"name": "character-acting", "maturity": "draft"}
+  ]
+}

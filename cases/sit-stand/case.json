@@ -1,0 +1,33 @@
+{
+  "id": "sit-stand",
+  "skill": "character-body-mechanics",
+  "split": "development",
+  "title": "坐上木凳并起立",
+  "prompt": "使用固定 GLB 的外观和骨架，从静止姿势制作 7 秒动作：角色站在木凳前，坐下，稳定坐住约 1 秒，再不借助手臂起立并站稳。禁止复用输入中的动作或其他成品关键帧。保留角色绑定，可新增控制器。木凳用 Blender 基础几何制作。交付可编辑工程、含凳子的 GLB 和主镜头、侧面原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "props": [{"name": "bench", "seat_dimensions": [0.9, 0.45, 0.08], "seat_top_z": 0.48, "seat_center_xy": [0, -0.35]}],
+    "start": "角色在凳子前方，允许按腿长设置初始双脚位置并记录。"
+  },
+  "duration_seconds": 7,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，包含凳子与双脚。", "auxiliary": ["沿 -X 看侧面"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "support", "description": "双脚与座面承重切换连续；臀部无明显穿凳，腿长与膝向稳定。"},
+      {"id": "sequence", "description": "包含坐下、至少约 1 秒稳定坐姿、无手支撑起立和站稳。"},
+      {"id": "export", "description": "重新导入 GLB 后接触和时序一致，凳子位置正确。"}
+    ],
+    "taste": [
+      {"id": "weight", "description": "坐下减速、离座前倾和起立发力可读，不呈垂直升降机运动。"},
+      {"id": "settle", "description": "坐住与站稳有自然缓冲，没有多余全身摆动。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

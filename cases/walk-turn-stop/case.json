@@ -1,0 +1,35 @@
+{
+  "id": "walk-turn-stop",
+  "skill": "character-body-mechanics",
+  "split": "development",
+  "title": "雪地幸存者行走、转向、停稳",
+  "prompt": "使用固定 GLB 的角色外观与骨架，从静止姿势新建一段 6 秒全身动作：起步，沿 +Y 走约 2 米，向角色右侧转约 90°，继续走约 1 米并停稳。允许调整脚步数量以符合腿长。移除或静音原有 Idle、Walk、Chop 的动画，不复用其关键帧或其他成品动画。保留原绑定，可添加控制器，但不得重新生成角色。制作可编辑 Blender 工程、包含根位移的 GLB，以及主镜头、正面和侧面的原速视频。使用中性光照与地面网格，完整展示双脚。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "保持角色和骨架整体比例，统一到 1.8 米；面向 +Y，脚底 z=0，初始中心 x=y=0。记录原始变换和归一化方式。",
+    "ground_z": 0,
+    "props": []
+  },
+  "duration_seconds": 6,
+  "fps": 30,
+  "camera": {
+    "main": "固定斜前方全身镜头，覆盖完整路径，1920×1080；不追踪头部，不裁脚。",
+    "auxiliary": ["沿 -Y 看正面", "沿 -X 看侧面"]
+  },
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "front.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "contact", "description": "逐段指出支撑脚和接触点；承重时无可见滑动、穿地、膝盖翻转。"},
+      {"id": "path", "description": "包含起步、约 90° 转向和停稳；位移符合任务，脚步跟随根运动。"},
+      {"id": "export", "description": "重新导入 GLB 后时长、根位移和接触与工程一致。"}
+    ],
+    "taste": [
+      {"id": "weight", "description": "承重和制动可信，身体经过支撑脚，停步不似突然断电。"},
+      {"id": "rhythm", "description": "起步、匀速、转向、停止有节奏区别；躯干与手臂跟随克制。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

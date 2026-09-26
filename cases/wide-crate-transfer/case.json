@@ -1,0 +1,35 @@
+{
+  "id": "wide-crate-transfer",
+  "skill": "character-prop-interaction",
+  "split": "transfer",
+  "title": "迁移：抱宽箱转身放上低台",
+  "prompt": "从固定原始角色重新制作 8 秒动作：双手从地面抱起较宽箱体，向左转约 90°，放上低台并松手。重量较轻但箱体宽度限制手臂和视野。不得使用其他 case 的作品、修正版、评价、经验记录或成品动画。允许读取被评测的 Skill 包。保留绑定，可新增控制器。交付工程、角色与道具动画 GLB、全身及握持近景原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "props": [
+      {"name": "wide-crate", "dimensions": [0.8, 0.35, 0.3], "center": [0, 0.5, 0.15], "intended_mass_kg": 8},
+      {"name": "low-table", "top_dimensions": [1.0, 0.7, 0.08], "top_z": 0.45, "center_xy": [-0.85, 0.2]}
+    ]
+  },
+  "duration_seconds": 8,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，覆盖旋转与落点。", "auxiliary": ["握持近景", "侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "grip.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "grip", "description": "宽箱抓握可达，双手接触连续；箱体不穿躯干，手臂不被拉长。"},
+      {"id": "support", "description": "转向包含支撑调整，箱体先稳在低台再松手，没有父级切换跳变。"},
+      {"id": "export", "description": "重新导入 GLB 后角色与箱体同步，接触一致。"}
+    ],
+    "taste": [
+      {"id": "adaptation", "description": "动作体现宽度限制与较轻负载，未机械套用重箱时长或姿势。"},
+      {"id": "clarity", "description": "搬起、转身、放稳层次清楚，全身动作经济。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

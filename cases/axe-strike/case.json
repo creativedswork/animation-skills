@@ -1,0 +1,36 @@
+{
+  "id": "axe-strike",
+  "skill": "character-prop-interaction",
+  "split": "development",
+  "title": "双手持斧劈木",
+  "prompt": "用固定角色从静止姿势制作 6 秒双手持斧动作：预备、蓄力、向前下方劈中木墩上的目标、短暂承受冲击、恢复控制。只做一击，不要求木材破碎。斧刃允许短暂浅入木面，不得穿过木墩。输入虽有 Chop 动作，本 case 禁止复用其关键帧及其他成品动画。保留绑定，可增加控制器。用 Blender 几何制作斧头与木墩。交付工程、角色与道具合并 GLB、全身与接触近景原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "props": [
+      {"name": "axe", "handle_length": 0.8, "head_width": 0.24},
+      {"name": "stump", "radius": 0.25, "top_z": 0.55, "center_xy": [0, 0.85]}
+    ],
+    "target": [0, 0.85, 0.55]
+  },
+  "duration_seconds": 6,
+  "fps": 30,
+  "camera": {"main": "固定斜侧方全身镜头，1920×1080，完整展示斧头轨迹。", "auxiliary": ["斧刃与目标接触近景", "正面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "impact.mp4", "front.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "hit", "description": "真实斧刃命中指定木面，接触前后连续，工具不穿过身体或木墩。"},
+      {"id": "grip", "description": "双手握柄关系连续，脚部支撑和膝盖方向稳定。"},
+      {"id": "export", "description": "重新导入 GLB 后斧头与角色同步，冲击时刻一致。"}
+    ],
+    "taste": [
+      {"id": "force", "description": "准备、加速、冲击和恢复可读，力量由全身传递。"},
+      {"id": "rhythm", "description": "撞击具有明确节奏，恢复消化余势，没有僵硬倒放。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

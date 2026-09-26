@@ -1,0 +1,33 @@
+{
+  "id": "alert-turn",
+  "skill": "character-acting",
+  "split": "development",
+  "title": "听到身后动静后警觉转身",
+  "prompt": "使用固定角色从静止姿势制作 5 秒身体表演。角色起初放松面向 +Y，在第 1 秒听到右后方动静，先判断，再转身观察并保持警觉。不用字幕、声音或特效解释情绪。禁止复用已有动画。保留绑定，可添加控制器；没有眼球骨时以头部和身体表达注意力。交付工程、GLB、主镜头与正侧面原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，中心 x=y=0，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "stimulus": {"time_seconds": 1, "world_position": [2, -2, 1.5]},
+    "props": []
+  },
+  "duration_seconds": 5,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，保证前后姿态轮廓可读。", "auxiliary": ["正面全身", "侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "front.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "attention", "description": "反应发生在刺激之后，头部与身体最终朝向右后方目标，关节不异常扭转。"},
+      {"id": "support", "description": "转身有可信脚步或支撑点转移，无可见滑步与膝盖翻转。"},
+      {"id": "export", "description": "重新导入 GLB 后表演时序、注视方向和支撑一致。"}
+    ],
+    "taste": [
+      {"id": "intent", "description": "不看任务文字也能辨认注意力改变、判断与警觉。"},
+      {"id": "restraint", "description": "启动先后和停顿服务于意图，没有随机摆头或无意义全身颤动。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

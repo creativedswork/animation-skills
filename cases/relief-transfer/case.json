@@ -1,0 +1,32 @@
+{
+  "id": "relief-transfer",
+  "skill": "character-acting",
+  "split": "transfer",
+  "title": "迁移：紧张确认后松一口气",
+  "prompt": "从固定原始角色重新制作 6 秒身体表演：角色紧张注视左前方，在约第 2 秒确认没有危险，逐渐放松，最后将注意力移回前方。不使用面部特写、字幕、音效或额外物体解释情绪。不得读取其他 case 的作品、修正版、评价、经验记录或成品关键帧。允许读取被评测 Skill 包。保留绑定，可新增控制器。交付工程、GLB、主镜头与侧面原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "attention_target": [-2, 2, 1.5],
+    "props": []
+  },
+  "duration_seconds": 6,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，头胸方向清楚。", "auxiliary": ["侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "sequence", "description": "确认、放松、注意力回前方的顺序明确，头部朝向在关节范围内。"},
+      {"id": "continuity", "description": "姿态变化连续、脚底接触稳定；导出后时序和姿态一致。"}
+    ],
+    "taste": [
+      {"id": "intent", "description": "不看提示也能辨认紧张转为安心，情绪变化依靠身体而非文字。"},
+      {"id": "restraint", "description": "放松的时序与呼吸有层次，没有全身同时塌下或循环摇摆。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}

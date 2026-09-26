@@ -1,0 +1,32 @@
+{
+  "id": "tired-walk",
+  "skill": "character-acting",
+  "split": "development",
+  "title": "疲惫行走后停下喘息",
+  "prompt": "固定角色从静止姿势制作 7 秒身体表演：疲惫但仍想向前，沿 +Y 走约 2 米，停下恢复呼吸，最后重新抬头准备继续。不用声音、字幕和面部特写解释情绪。组合身体力学知识保证脚步可信。禁止复用输入动作或成品动画。保留绑定，可添加控制器。交付工程、含根位移 GLB 和主镜头、正侧面原速视频。",
+  "inputs": ["survivor-rig-glb"],
+  "scene": {
+    "units": "meters",
+    "character_height": 1.8,
+    "normalization": "整体等比归一到 1.8 米，面向 +Y，脚底 z=0；记录变换。",
+    "ground_z": 0,
+    "props": []
+  },
+  "duration_seconds": 7,
+  "fps": 30,
+  "camera": {"main": "固定斜前方全身镜头，1920×1080，覆盖路径和双脚。", "auxiliary": ["正面全身", "侧面全身"]},
+  "deliverables": ["editable.blend", "animation.glb", "main.mp4", "front.mp4", "side.mp4"],
+  "criteria": {
+    "correctness": [
+      {"id": "contact", "description": "脚步、根位移与支撑匹配；低抬脚仍有净空，无腿部高频抖动。"},
+      {"id": "sequence", "description": "走、停下喘息、重新抬头三个动作段完整，没有动作接缝跳变。"},
+      {"id": "export", "description": "重新导入 GLB 后时序、根位移和接触一致。"}
+    ],
+    "taste": [
+      {"id": "fatigue", "description": "疲惫体现在推进、恢复或姿态中，能读到继续前进的意愿。"},
+      {"id": "economy", "description": "表演克制，呼吸与停顿有目的，不以全身抖动堆砌情绪。"}
+    ]
+  },
+  "minimum_taste": 4,
+  "required_for_release": true
+}
