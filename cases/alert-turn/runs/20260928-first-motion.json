@@ -1,0 +1,203 @@
+{
+  "id": "20260928-first-motion",
+  "case": "alert-turn",
+  "status": "recording",
+  "fingerprints": {
+    "case": "8142847fed1be3508cbf2bb893f3b0f5d35bc4e2f931b68bf49f3e3b29817149",
+    "skills": {
+      "character-body-mechanics": "4ee9e3cdbc6b257ec7f8ff4c964139393b27544a35f4fbf532397df1e10e5843",
+      "character-prop-interaction": "6ee59a4973077933130a65c47283530d916dd82695ca4df6bf0b6f6c38c0fe0f",
+      "character-acting": "de67176a1d1a0d8e6e3194fa3c1360263ddccf7dd314a83fe4a093afee243e92"
+    },
+    "inputs": {
+      "survivor-rig-glb": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd"
+    }
+  },
+  "environment": {
+    "model": "GPT-6",
+    "harness": "TRAE agent; Blender CLI; Three.js viewer with Playwright/Chrome",
+    "blender": "5.1.1 (b70da489d7f4)",
+    "budget": "本地制作；未设固定时间或 token 预算；未调用收费生成。",
+    "usage": "0 次收费生成；未单独计量 token 和制作耗时。最终视频由逐帧采样合成，信息见各镜头 rendering.json；recording.json 为实时捕获诊断历史。"
+  },
+  "execution": {
+    "from_raw_inputs": true,
+    "human_artifact_edits": false,
+    "human_extra_guidance": false,
+    "notes": "用户要求制作剩余 7 例，没有提供关键帧、姿势或人工作品修改。本轮先从原始 GLB 制作宽箱与放松两个迁移案例，完成其初稿前未读取其他案例的成品关键帧或评价。复用原有坐标归一化与骨骼求解工具，并扩展双手 IK；各任务重新编写节拍和轨迹。同时读取全局 animated-character-pipeline 的通用资产、运动和验收参考；它未纳入三个被测 Skill 的包指纹。未复用输入 Idle、Walk、Chop。公开任务、同一 Agent 和同一骨架，不构成盲测或 Skill 效果对照实验。"
+  },
+  "initial": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/alert-turn/initial/animation.glb",
+        "sha256": "deb308298488d6acb028ee7feaf849b25e22df6bfd23e4789466d5917361a28a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/authoring.py",
+        "sha256": "55f6cfac033fdbc9e3f4a784ea51b8a20965406a4d58e039706c7101d7e618b0"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/alert-turn/initial/editable.blend",
+        "sha256": "992bada9f981c6203f4e060cd58b85280a8fae4d876be817f94c78b53d6cffc2"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/front-realtime.mp4",
+        "sha256": "bdb5e7c4a27b6dac0c2520da22290398f04c240add0d4eb4f2c9e9c889503617"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/front-rendering.json",
+        "sha256": "a2e9bd7c74ff26e7215884ce5ec625fda9a196f6f95c0ca266067bd3fb271f9f"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/front.mp4",
+        "sha256": "b1607692e8c1e9d93634fd4f965cb49f20796d76486fe384f72a46023d0d5a79"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/main-capture.mp4",
+        "sha256": "69c386af27717698f549f64ff297c17f1a5050ffbce5e7d70ebbc557fdd2e5f0"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/main-first-take.mp4",
+        "sha256": "fa532e0d55dba3c86adc68ded1cfac82d0702533989989499fda980a3445e0e3"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/main-realtime.mp4",
+        "sha256": "d1f1ed6d6f15d49da7a79b1f0c0c5b0118aba858c6c90c736a65dbdc1b15bd55"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/main-rendering.json",
+        "sha256": "5d868c953aa2b4c92a17e221811a6017c3112fe836440658581f6a7b234583bd"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/main.mp4",
+        "sha256": "1275e4644fd817ac84e0890a697a03dfae2381f12e9fdecf10fc2d58236e594f"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/motion-samples.json",
+        "sha256": "1103f1bf195c67cbe70ebb746fad5b21cb00811f18831bf48001c2e0fb8f54ef"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/perspective-1.5.png",
+        "sha256": "98f48467f3c4610aa2723b4ddd914603275d37c5271cfc11da9ad5ccf3115840"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/perspective-2.7.png",
+        "sha256": "c549def9c75ad6557c379bd5014854ef9bc7bd4c6b938f25f5683c7ee56cf0ee"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/perspective-5.png",
+        "sha256": "8d349473dce329ea6dd031e5a0e25a80e8d740844935bcd88d2ccfdf6530535e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/preview-perspective.json",
+        "sha256": "29f3b2532fac65b4e747ebb34c915b49313f90ee8a297e40d59e61242e6042c4"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/production.json",
+        "sha256": "96f9cbdf73687dfcbaf312adfdd905f83cb86d83e8067fa50cded166aa937756"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/recording-before-timing-fix.json",
+        "sha256": "17f7827e6a66cd7ca58a4bea7fcabc81d1532dc6b5106ce59cff8d217ca93df0"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/recording-with-paused-lead.json",
+        "sha256": "d7fb9231f355cef489905a464611fa3ef31258a2c960ece98a9c1eaf393b56e3"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/recording.json",
+        "sha256": "ab5581e151d51d5363a3a3691cfd52811e94c09421c7813c07cd6655a74a9293"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/reimport-check.json",
+        "sha256": "62939069cda1ffda11d6e86dbab64551e61ee7835caeb8560116f070840fa2b2"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/review-sheet.png",
+        "sha256": "a1d4151cf109caccd8edc3deffcc27ddefe7395c90ef2913dce017ab24f235f7"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/side-realtime.mp4",
+        "sha256": "d8fff371ec2477a66979298ac13ba2d93725b14bfa6c9727a833069207bf80f5"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/side-rendering.json",
+        "sha256": "79609ed5dd9eb7f70c1b75740cd553dc212ad7779db3988ab5b95a9224612c3f"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/alert-turn/initial/side.mp4",
+        "sha256": "74381dbf70e754e3fdb07c61fc016dc4823449bbfd2ffe4baec7755d39b69ddf"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/timing-fix.json",
+        "sha256": "876ced10cbfa2d13bc2b11595b2d3feba2fb0909f8b9feee6b15e567cb8f33ff"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/video-contact-sheet.png",
+        "sha256": "ef32c38dd988060424306005bbe203c072286e0ed2d2ea5240fcace94ba00af0"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/alert-turn/initial/video-delivery.json",
+        "sha256": "3cf65eacba280f4fe51fe62e4734dcf4490747e10f28d2b5acbe4d023e57022a"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：151 帧，17 骨，5.0 秒；最大关节回读误差 5.1e-07 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "刺激后头部先转、身体随后换脚朝右后方；缺少眼球骨，方向依靠头部表达。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "issue": "查看器截断帧间隔或沿用暂停前计时，录制器又晚于播放首帧启动，导致时长偏差或首帧缺失。",
+      "change": "修正查看器计时；实时录屏仍有丢帧，最终按任务帧率逐帧采样 GLB 并以同帧率编码。保留全部捕获历史。",
+      "actor": "GPT-6",
+      "rationale": "原速评分使用 main.mp4 等逐帧视频及 rendering 记录；realtime、first-take、capture 视频仅用于诊断。GLB 未修改。"
+    }
+  ],
+  "corrected": null,
+  "lessons": []
+}

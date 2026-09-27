@@ -1,6 +1,6 @@
 # 制作案例
 
-本目录现有 9 个任务定义。`sit-stand` 与 `low-seat-transfer` 已有制作记录和可预览动画，其余 7 个尚待制作；当前没有完整的接受评价。它们使用已存在的 Meshy 角色；场景道具由 Blender 基础几何制作。原始 GLB 中的动作禁止复用，以便比较动作制作能力。
+本目录现有 9 个任务，均有制作记录和可预览动画；当前没有完整的接受评价。它们使用已存在的 Meshy 角色；场景道具由 Blender 基础几何制作。原始 GLB 中的动作禁止复用，以便比较动作制作能力。
 
 | 能力 | 开发案例 | 公开迁移案例 |
 | --- | --- | --- |
@@ -14,12 +14,19 @@
 
 `case.json` 是给制作 Agent 的任务说明，包含输入、场景、动作时长、交付物和评价标准。当前没有执行任意 `case.json` 并自动完成动画的通用命令。
 
-已有两个案例可直接运行 Blender 脚本重建：
+9 个案例可直接运行 Blender 脚本重建：
 
 | Case | 制作脚本 |
 | --- | --- |
 | `sit-stand` | `tools/production/sit_stand.py` |
 | `low-seat-transfer` | `tools/production/low_seat.py` |
+| `walk-turn-stop` | `tools/production/walk_turn.py` |
+| `tired-walk` | `tools/production/tired_walk.py` |
+| `lift-heavy-box` | `tools/production/heavy_box.py` |
+| `axe-strike` | `tools/production/axe.py` |
+| `alert-turn` | `tools/production/alert.py` |
+| `wide-crate-transfer` | `tools/production/wide_crate.py` |
+| `relief-transfer` | `tools/production/relief.py` |
 
 以新一轮坐下起立为例，在仓库根目录运行；`blender` 指向本机 Blender 5.1 可执行文件：
 
@@ -35,9 +42,9 @@ blender --background --factory-startup --disable-autoexec \
 
 临时载入不会修改运行记录。要让新作品长期出现在对应案例的素材列表中，在 `cases/sit-stand/runs/trial-02.json` 的 `initial.artifacts` 中登记 `role=export`、GLB 的仓库相对 `path` 和实际 `sha256`，再执行 `python3 tools/project.py check --artifacts`，刷新页面并选择该记录。用 `shasum -a 256 <文件路径>` 可取得文件指纹。完整记录还需工程、录像和实际评价；格式见 [工程约定](../docs/engineering.md)。
 
-`tools/production/register.py` 仅登记首次两段坐站作品，不是新运行的通用登记命令。重建、录像与回读检查的细节见 [两段坐站动作](../docs/seated-motion.md)。
+`tools/production/register.py` 仅登记首次两段坐站作品，`register_remaining.py` 仅登记本轮新增七段作品；它们不是新运行的通用登记命令。重建、录像与回读检查的细节见[两段坐站动作](../docs/seated-motion.md)和[七段新增动作](../docs/remaining-motion.md)。
 
-其余案例按下节准备输入和运行记录，再由 Agent 读取任务及对应 Skill，在 Blender 中制作并导出；创建记录本身不会生成动画。
+需要重新评测 Skill 时，按下节准备输入和运行记录，由 Agent 从原始素材重新制作；直接重跑已有脚本只重建同一作品，不能算新一轮独立制作评测。
 
 ## 开始一次制作
 

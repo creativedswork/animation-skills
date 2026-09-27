@@ -1,0 +1,337 @@
+{
+  "id": "20260928-first-motion",
+  "case": "tired-walk",
+  "status": "recording",
+  "fingerprints": {
+    "case": "d5b2ec3433e63e7c2e500a084206d517f9449cd897d84a83510a7e32818c2467",
+    "skills": {
+      "character-body-mechanics": "4ee9e3cdbc6b257ec7f8ff4c964139393b27544a35f4fbf532397df1e10e5843",
+      "character-prop-interaction": "6ee59a4973077933130a65c47283530d916dd82695ca4df6bf0b6f6c38c0fe0f",
+      "character-acting": "de67176a1d1a0d8e6e3194fa3c1360263ddccf7dd314a83fe4a093afee243e92"
+    },
+    "inputs": {
+      "survivor-rig-glb": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd"
+    }
+  },
+  "environment": {
+    "model": "GPT-6",
+    "harness": "TRAE agent; Blender CLI; Three.js viewer with Playwright/Chrome",
+    "blender": "5.1.1 (b70da489d7f4)",
+    "budget": "本地制作；未设固定时间或 token 预算；未调用收费生成。",
+    "usage": "0 次收费生成；未单独计量 token 和制作耗时。最终视频由逐帧采样合成，信息见各镜头 rendering.json；recording.json 为实时捕获诊断历史。"
+  },
+  "execution": {
+    "from_raw_inputs": true,
+    "human_artifact_edits": false,
+    "human_extra_guidance": false,
+    "notes": "用户要求制作剩余 7 例，没有提供关键帧、姿势或人工作品修改。本轮先从原始 GLB 制作宽箱与放松两个迁移案例，完成其初稿前未读取其他案例的成品关键帧或评价。复用原有坐标归一化与骨骼求解工具，并扩展双手 IK；各任务重新编写节拍和轨迹。同时读取全局 animated-character-pipeline 的通用资产、运动和验收参考；它未纳入三个被测 Skill 的包指纹。未复用输入 Idle、Walk、Chop。公开任务、同一 Agent 和同一骨架，不构成盲测或 Skill 效果对照实验。"
+  },
+  "initial": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/tired-walk/initial/animation.glb",
+        "sha256": "d1877516c2de2603b4658bea2058e15c547d2d29b25b71907b4045ac5bedbfad"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/authoring.py",
+        "sha256": "a02d8115b5d65bc4697e8f9a4d829671f9ba0b7f58e47a1fa418c1a28144dd6c"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/tired-walk/initial/editable.blend",
+        "sha256": "c6028c0d6fe1d289cb3864a8d147124a16cab01556fff5b3dea1f50730a0509e"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/front-realtime.mp4",
+        "sha256": "205af74160158de34edc78343e2397a8b465bd84486658e7c09f462fdc42503a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/front-rendering.json",
+        "sha256": "c775e29b2ccecc8b116b704e3cda3c4514ebc461301522197aae4ca0f9e8303d"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/front.mp4",
+        "sha256": "cd21ff5949847951e297770e8cdd5b42182ee5aa20ab2620f64359e6e561ce94"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/main-capture.mp4",
+        "sha256": "c36921bb04ca34e12f7a7696d3ece36897dbe3f2309d79a9b7cc637381bc3f42"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/main-first-take.mp4",
+        "sha256": "97514df1969382e5700d4134a9191df443a5dd0668b52d5037043057beec5895"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/main-realtime.mp4",
+        "sha256": "5a0d91f0d74531c6282fe52744aa2b4609468bafb9c3ae97cab4433c44c1ed1b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/main-rendering.json",
+        "sha256": "ae244372ef3a8e2ef3840f01b6a8f13aea44ab12c673476185da2aac8ddf060c"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/main.mp4",
+        "sha256": "6bf5d6c32a3b192b26363dd12b88d946dbf8aac109021ece0dca081025f0374d"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/motion-samples.json",
+        "sha256": "298f55d049246ccb81c3063cdb55fd9e3d628930e1656eca5c7d172481420add"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/preview-side.json",
+        "sha256": "795e0710a0d6a09ba3f13a6d20e0362dd07ba4465855784bf309705eb436b80a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/production.json",
+        "sha256": "5da9839cb37ecb31e837acb8bf1e56bdb6a4d07490878b3b2800bbf999e94ed1"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/recording-before-final-capture.json",
+        "sha256": "68af939e9cea40fb11674925dd7a04fa9c0059cc2b6c5143b5c640900b7fe96e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/recording.json",
+        "sha256": "7c947a479f0f61014a5875f512d1da556138c32c9a68e4d0b60fb5f0fe8bf326"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/reimport-check.json",
+        "sha256": "ddaf58380d09bbf386bb96fd873e4778f86649015b1fb9e821937878f8dd7f51"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/review-sheet.png",
+        "sha256": "fae786713f0611fcda38dc2bb0b14749770a32ed7668960989bcbe1a9241735c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/side-2.png",
+        "sha256": "bb26261426dddfd50d7a7fa84e6fca8734a487f9e81f1ec834e8f81efc056663"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/side-4.8.png",
+        "sha256": "8104c4a9ae8a856129a76ae6ceb89d9ae0620b6cf61b63594146353e32ad9e26"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/side-6.8.png",
+        "sha256": "e1154d847786d62e243d6f2e98bd605e4eb4d8259d0fbcaaeeb04e4fbed749be"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/side-realtime.mp4",
+        "sha256": "1b2e5ecaba462223f3617860f30f7670088bc5d0dcfe033ff2982fe31b7c686c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/side-rendering.json",
+        "sha256": "5dd19aa255766ff27a78c6089653d2e45fe4ff056e0309459ee4a7af748057c3"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/initial/side.mp4",
+        "sha256": "6f67644965aa1e4773ce23945605b9e60e7a0eaeb4caeff67afda66cc48c9e31"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/initial/video-delivery.json",
+        "sha256": "3cf65eacba280f4fe51fe62e4734dcf4490747e10f28d2b5acbe4d023e57022a"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：211 帧，17 骨，7.0 秒；最大关节回读误差 7.7e-07 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "保留初稿过低骨盆；修正版减少持续下蹲，疲劳主要由短步、躯干与恢复呼吸表达。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "issue": "初稿骨盆持续偏低，行走或恢复阶段有持续蹲行观感。",
+      "change": "提高行走与喘息阶段骨盆，保留短步和胸腔呼吸节奏。",
+      "actor": "GPT-6",
+      "rationale": "依据初稿 Three.js 预览；保留 initial，并另存 corrected 工程和导出物。"
+    },
+    {
+      "issue": "查看器截断帧间隔或沿用暂停前计时，录制器又晚于播放首帧启动，导致时长偏差或首帧缺失。",
+      "change": "修正查看器计时；实时录屏仍有丢帧，最终按任务帧率逐帧采样 GLB 并以同帧率编码。保留全部捕获历史。",
+      "actor": "GPT-6",
+      "rationale": "原速评分使用 main.mp4 等逐帧视频及 rendering 记录；realtime、first-take、capture 视频仅用于诊断。GLB 未修改。"
+    }
+  ],
+  "corrected": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/tired-walk/corrected/animation.glb",
+        "sha256": "8c9aca9e13cefc7a956950d192742b50c70aaf240976c724716018f9a5b041d2"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/authoring.py",
+        "sha256": "a489dc18efd2932f2f439e6dac269a6e6535578aa26d9f0b3bf328471b47a414"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/contact-summary.json",
+        "sha256": "80957b83e60bcc9a41d5e07f1483438ac81ee2320de5fc629149eb52e184d73f"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/tired-walk/corrected/editable.blend",
+        "sha256": "ba311fda7aecf9fe2283d9ab0fb8dca97a42eb028ca94040b7c94129f4fa13c0"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/front-realtime.mp4",
+        "sha256": "ddec34298e99739582742449512a6dfade2ff3724f636601e0c503e5a2ede9b5"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/front-rendering.json",
+        "sha256": "6268baef72a38f44cf84dd4e1e23e49d80647298a18fa6bf3791efd63be54fbd"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/front.mp4",
+        "sha256": "22d7f432c8c612d7774bb77eef69c8e7a521718019c50930c87126760113767f"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/main-first-take.mp4",
+        "sha256": "b6af93e3dbe9a4d97f5b35b20940f04fcf6fc5dc10669e7e4373189ba6d1ac59"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/main-realtime.mp4",
+        "sha256": "233256afa6fedc6c23822f8722818aa61df2b974fbbcdca8546556dafc65d8f9"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/main-rendering.json",
+        "sha256": "feb7d8974ac840c29b5e222bcd5ef172183c046b117ffe6d7918e5f61ea08ce0"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/main.mp4",
+        "sha256": "70a0a2189fa31980132977a8c0c1ce357d9ae933bfb3a4529430fb23a9988f8c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/motion-samples.json",
+        "sha256": "ce0fdec127281e97ac328950b01a6c9afe44a57000677d55b3f56923adda2b6b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/production.json",
+        "sha256": "5da9839cb37ecb31e837acb8bf1e56bdb6a4d07490878b3b2800bbf999e94ed1"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/recording-before-timing-fix.json",
+        "sha256": "c9a840ede1884d1f0340351ccd50a0705710fdcacf75f860f25ce5899b11bd16"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/recording.json",
+        "sha256": "a3557f21eb67f91899f7c76c8c39df9881cd77e7398f57d7ce6f3abd28718505"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/reimport-check.json",
+        "sha256": "29d74b9d008ab3c1d2d48beeecb0418b3505e0068142d864afd664514349e67f"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/review-sheet.png",
+        "sha256": "75920c6018b77bab7e0823ebf9e05dc61e6e17b9105c9f896d74980453d059bb"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/side-realtime.mp4",
+        "sha256": "d97a7d91f7c520457734b1fb15021faa100f2c4bdde87044ba4a71aabd4db59a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/side-rendering.json",
+        "sha256": "001451238cc0b0beb4fdf91fbeb99873a51ce01bd227993b7b876d2b511b3ba3"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/tired-walk/corrected/side.mp4",
+        "sha256": "fad370f77d53be13d60bf082fad2f9474a01da28ce8773ae9de2e08bc5bc08d1"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/timing-fix.json",
+        "sha256": "94c3c27cf4b1f9dcdb51501c82b0df64c35fb5b506582e1bf3b4beb7ccfc6fdd"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/video-contact-sheet-first-take.png",
+        "sha256": "16526dc4ddb0835010786f822f7088afadfa07676c56e2f6e43824ccb85bae09"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/video-contact-sheet.png",
+        "sha256": "aca42e1fcd369f94b9b9331d4791de32a6da98b84576aefbd49a58e94b6c35df"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/tired-walk/corrected/video-delivery.json",
+        "sha256": "3cf65eacba280f4fe51fe62e4734dcf4490747e10f28d2b5acbe4d023e57022a"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：211 帧，17 骨，7.0 秒；最大关节回读误差 9.5e-07 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "保留初稿过低骨盆；修正版减少持续下蹲，疲劳主要由短步、躯干与恢复呼吸表达。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "lessons": []
+}

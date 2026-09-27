@@ -1,0 +1,364 @@
+{
+  "id": "20260928-first-motion",
+  "case": "walk-turn-stop",
+  "status": "recording",
+  "fingerprints": {
+    "case": "b51702d6bbf8c3a9d89abca3a9d24b4637f86bac25d71ffe9b0d8d6adc4614b1",
+    "skills": {
+      "character-body-mechanics": "4ee9e3cdbc6b257ec7f8ff4c964139393b27544a35f4fbf532397df1e10e5843",
+      "character-prop-interaction": "6ee59a4973077933130a65c47283530d916dd82695ca4df6bf0b6f6c38c0fe0f",
+      "character-acting": "de67176a1d1a0d8e6e3194fa3c1360263ddccf7dd314a83fe4a093afee243e92"
+    },
+    "inputs": {
+      "survivor-rig-glb": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd"
+    }
+  },
+  "environment": {
+    "model": "GPT-6",
+    "harness": "TRAE agent; Blender CLI; Three.js viewer with Playwright/Chrome",
+    "blender": "5.1.1 (b70da489d7f4)",
+    "budget": "本地制作；未设固定时间或 token 预算；未调用收费生成。",
+    "usage": "0 次收费生成；未单独计量 token 和制作耗时。最终视频由逐帧采样合成，信息见各镜头 rendering.json；recording.json 为实时捕获诊断历史。"
+  },
+  "execution": {
+    "from_raw_inputs": true,
+    "human_artifact_edits": false,
+    "human_extra_guidance": false,
+    "notes": "用户要求制作剩余 7 例，没有提供关键帧、姿势或人工作品修改。本轮先从原始 GLB 制作宽箱与放松两个迁移案例，完成其初稿前未读取其他案例的成品关键帧或评价。复用原有坐标归一化与骨骼求解工具，并扩展双手 IK；各任务重新编写节拍和轨迹。同时读取全局 animated-character-pipeline 的通用资产、运动和验收参考；它未纳入三个被测 Skill 的包指纹。未复用输入 Idle、Walk、Chop。公开任务、同一 Agent 和同一骨架，不构成盲测或 Skill 效果对照实验。"
+  },
+  "initial": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/walk-turn-stop/initial/animation.glb",
+        "sha256": "3de598e35d54a5f9e555c60d419df53cb6df5701316cc13f8c3f6d8d84b48716"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/authoring.py",
+        "sha256": "87751ff60e093dfc6acc080c3d6d355652a0f26e292ec441d6a25ba7167b65c5"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/walk-turn-stop/initial/editable.blend",
+        "sha256": "3f90a12739cb4038fc73b00a01036d9fb8ca29786f02e3ddb0ea551a33e1463b"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/front-capture.mp4",
+        "sha256": "e67cad675dd52c633ed609ca4aa686f8b9ca42f33382f2802992a84805afcbe6"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/front-first-take.mp4",
+        "sha256": "d5e1e20728174595a087b002c8f0265e2ee3b89af8be965e1b2afaa35945b05b"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/front-realtime.mp4",
+        "sha256": "b2ad653b56040bceefea5ff2e7a85f1e42dfa4d5610d38a097bf944d5169487c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/front-rendering.json",
+        "sha256": "5cd3a2d2683573e24f37f27bbe78c60642aa28ccad711473025e94bf145a31fb"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/front.mp4",
+        "sha256": "d221b5f58b4beb2aebff81ee23e746ed9dde599e3b2621dc82c09c58532b86ee"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/main-capture.mp4",
+        "sha256": "35dbc01770e934dfcad17a13692a70ea580ce4d6a420d67668f9e8db61583011"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/main-first-take.mp4",
+        "sha256": "0e07c617ab24eec7240393626ac5eccb7edac29af5fcd7cc480d2f9807ebbd52"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/main-realtime.mp4",
+        "sha256": "bae5e843f8d270332b3f636d37a1eea9f540800933156f411b21525b12fad38a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/main-rendering.json",
+        "sha256": "bd40ac591f70d5a92b76d55be6032fd030c881b90cd42eb85303b0aadf015266"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/main.mp4",
+        "sha256": "96bcd70df7dbd458e8dd469483dcfe5b4e133c365bc97ec4588a3289bc3dace9"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/motion-samples.json",
+        "sha256": "a23c62b5d91156df9440f46f5cfe4cc62fbd83b4e6bd8a380a49bcf54f456fd1"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/perspective-0.6.png",
+        "sha256": "3549ce0d88c4cf1cb0a53a806f7cb7c0b7cc49b00254d4c4b7789e3a1e3aa578"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/perspective-2.6.png",
+        "sha256": "c9b7e05af1d435413d6d0c3ad34010f2488d9dc1e29518dd2c7b82c8ecfaeef6"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/perspective-3.6.png",
+        "sha256": "8ce0343a45c08dc334e92bef3d784ac02e254eedfa27e1a8e6ebb77c52d33fd0"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/perspective-5.9.png",
+        "sha256": "d545872be561cf826f805046b9a2254debb26deaf73838a7e26530700cfebe1d"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/preview-perspective.json",
+        "sha256": "3facdd050bb1c252e82cec9f9119a79c5f186f7a816b5318fa207f5fe18b9d7c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/production.json",
+        "sha256": "6dc8c4236e97d0515e06980a8cde3e27e7626548b805dc1922f3a7e7f16f640e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/recording-before-timing-fix.json",
+        "sha256": "c325fa7c3777db619492f3b727b060ab622b74a46f6e10cd565663c70ae99510"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/recording.json",
+        "sha256": "bbe9ed87262ff05fa34538d22dff77613aea3cfc17bfc3a7175ef36e262c8414"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/reimport-check.json",
+        "sha256": "852157ce61c9162f4308db1236dbb124f0e7d3ce472374c98b9402ba5d0b8d4b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/review-sheet.png",
+        "sha256": "9306ec627620b0a1c353fc11800f7f3ae97a8e9ee62039845c94348616f5e53f"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/side-realtime.mp4",
+        "sha256": "9b0cd097ba244db6f898339674c2cb3cd3af6e157cf87217ca6755cbfa64c040"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/side-rendering.json",
+        "sha256": "cc204f87ea8e15f5e69df470f669d2e2e42eee87528274144894591d15de8dc9"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/initial/side.mp4",
+        "sha256": "863c08dfeeae3325d420a97c05082340a18ae56eb9be27a5f7fb61d4b59f6bca"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/initial/video-delivery.json",
+        "sha256": "3cf65eacba280f4fe51fe62e4734dcf4490747e10f28d2b5acbe4d023e57022a"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：181 帧，17 骨，6.0 秒；最大关节回读误差 1.2e-06 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "保留初稿持续屈膝的画面；修正版按双脚可达范围抬高经过阶段骨盆。",
+        "没有脚趾关节，脚掌滚动与服装变形仍有限。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "issue": "初稿骨盆持续偏低，行走或恢复阶段有持续蹲行观感。",
+      "change": "依据脚部可达范围抬高经过姿势，保留步幅、路径和接触时刻。",
+      "actor": "GPT-6",
+      "rationale": "依据初稿 Three.js 预览；保留 initial，并另存 corrected 工程和导出物。"
+    },
+    {
+      "issue": "查看器截断帧间隔或沿用暂停前计时，录制器又晚于播放首帧启动，导致时长偏差或首帧缺失。",
+      "change": "修正查看器计时；实时录屏仍有丢帧，最终按任务帧率逐帧采样 GLB 并以同帧率编码。保留全部捕获历史。",
+      "actor": "GPT-6",
+      "rationale": "原速评分使用 main.mp4 等逐帧视频及 rendering 记录；realtime、first-take、capture 视频仅用于诊断。GLB 未修改。"
+    }
+  ],
+  "corrected": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/walk-turn-stop/corrected/animation.glb",
+        "sha256": "707ef05abce293905ed1733123a1aeda3afb4b6cf58bd407cadd57b80ace0d50"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/authoring.py",
+        "sha256": "b2c4819b5796ca8a7e01922a9441dfcfd2f5abcf250c0f9fdc24acb8d6de133e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/contact-summary.json",
+        "sha256": "b4eada39cd56adba669b728cbbd3587aa762e7f89e9a2792d5869a6911c48a34"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/walk-turn-stop/corrected/editable.blend",
+        "sha256": "dd721be73b65e63a5b44a3541f064679a1f81ff5969faf1b47ce11a7a23b389a"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/front-realtime.mp4",
+        "sha256": "0e71cd6a01eb501713bfb99a1f39235a4cbc9ab43e1d79791b53af56adcd990b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/front-rendering.json",
+        "sha256": "08d2cb43297606d153cc18616c0612d9ce5db8895b06b2b8eca458a547b3400f"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/front.mp4",
+        "sha256": "3fd3189df7af04be42054e384a80e2b57c3a94a2b2880efb155b1244c7191f57"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main-capture.mp4",
+        "sha256": "0d22b12d05854ce210f2a81771b705cc620b2b2f6088ca3521fc7bdc68c3c0de"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main-first-take.mp4",
+        "sha256": "3f8be98f142be827f5136ce8ef8f4d1454c710233a7f27e0f28e07fb25955c84"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main-realtime.mp4",
+        "sha256": "cce242ccac97f2201309b382275e9901ce2b83ab052a1121cd36ec1ab4af1ee5"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main-rendering.json",
+        "sha256": "c524fc0632f86c84eaacec1b6799a0aa75401f40696f0194f8dc5921517b51a5"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main-second-take.mp4",
+        "sha256": "2805fd94c7dff864be246cbe57105e263edf90f9e8622de38b956ceed2f4c764"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/main.mp4",
+        "sha256": "ac4aefb3216f2d3c069a45cc228af2bd5d209dd9ed775ddbf39444bb7a011981"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/motion-samples.json",
+        "sha256": "c3d383ab0f78ebd0c45caa19ca2c8a61fbe8043d9f52580f6e75ae56a48b0198"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/production.json",
+        "sha256": "6dc8c4236e97d0515e06980a8cde3e27e7626548b805dc1922f3a7e7f16f640e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/recording-before-final-capture.json",
+        "sha256": "55b8df1a56391a4d7a1026454ecac1afd70d2b198613bc15fb759d2be503264b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/recording-before-timing-fix.json",
+        "sha256": "1a6daf2e7d5588a24cb7a5e2f1315419974b75ad6f0d7591b7de77349741d27d"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/recording.json",
+        "sha256": "6b7b8d2a8d5424620778651fefd4d88a0f529a9c2f4d466215763648ea696607"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/reimport-check.json",
+        "sha256": "fcddfc88abfca163bafd70d11c7608060b1dc8f72df864c927013f0e45bd4787"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/review-sheet.png",
+        "sha256": "bb6d1c21b7f943aaf392eaf2cd30eb5fd9684e1854c30fe54b7014d648497aef"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/side-realtime.mp4",
+        "sha256": "5a1e9ab01cb9e8bd26aa25c6babe476a1151b73f8f7358cb853b4f10089053ce"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/side-rendering.json",
+        "sha256": "8d363a663bb9f5cc87de8a2a299019d4187efd70cdf725d69ce1e54d438ae531"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/walk-turn-stop/corrected/side.mp4",
+        "sha256": "83301f5f6e1fec0608735a8895778b82a0c4701105a27ee11d097e67953afa59"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/timing-fix.json",
+        "sha256": "0e26fffe4c0ca2f2551d72ee12511dbd61bec7faf1c903328c71f95c311b62ac"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/video-contact-sheet-first-take.png",
+        "sha256": "6a895a4f6714ca8444b22285330bc4acd5374ff259d257ac9242daabc6548e85"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/walk-turn-stop/corrected/video-delivery.json",
+        "sha256": "3cf65eacba280f4fe51fe62e4734dcf4490747e10f28d2b5acbe4d023e57022a"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：181 帧，17 骨，6.0 秒；最大关节回读误差 8.5e-07 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "保留初稿持续屈膝的画面；修正版按双脚可达范围抬高经过阶段骨盆。",
+        "没有脚趾关节，脚掌滚动与服装变形仍有限。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "lessons": []
+}

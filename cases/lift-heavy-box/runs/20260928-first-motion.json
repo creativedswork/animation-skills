@@ -1,0 +1,189 @@
+{
+  "id": "20260928-first-motion",
+  "case": "lift-heavy-box",
+  "status": "recording",
+  "fingerprints": {
+    "case": "79fffa26a329d13f064830075f4a93688fc7b54c1b7cf556ce39f9a8f91f44b6",
+    "skills": {
+      "character-body-mechanics": "4ee9e3cdbc6b257ec7f8ff4c964139393b27544a35f4fbf532397df1e10e5843",
+      "character-prop-interaction": "6ee59a4973077933130a65c47283530d916dd82695ca4df6bf0b6f6c38c0fe0f",
+      "character-acting": "de67176a1d1a0d8e6e3194fa3c1360263ddccf7dd314a83fe4a093afee243e92"
+    },
+    "inputs": {
+      "survivor-rig-glb": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd"
+    }
+  },
+  "environment": {
+    "model": "GPT-6",
+    "harness": "TRAE agent; Blender CLI; Three.js viewer with Playwright/Chrome",
+    "blender": "5.1.1 (b70da489d7f4)",
+    "budget": "本地制作；未设固定时间或 token 预算；未调用收费生成。",
+    "usage": "0 次收费生成；未单独计量 token 和制作耗时。最终视频由逐帧采样合成，信息见各镜头 rendering.json；recording.json 为实时捕获诊断历史。"
+  },
+  "execution": {
+    "from_raw_inputs": true,
+    "human_artifact_edits": false,
+    "human_extra_guidance": false,
+    "notes": "用户要求制作剩余 7 例，没有提供关键帧、姿势或人工作品修改。本轮先从原始 GLB 制作宽箱与放松两个迁移案例，完成其初稿前未读取其他案例的成品关键帧或评价。复用原有坐标归一化与骨骼求解工具，并扩展双手 IK；各任务重新编写节拍和轨迹。同时读取全局 animated-character-pipeline 的通用资产、运动和验收参考；它未纳入三个被测 Skill 的包指纹。未复用输入 Idle、Walk、Chop。公开任务、同一 Agent 和同一骨架，不构成盲测或 Skill 效果对照实验。"
+  },
+  "initial": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/lift-heavy-box/initial/animation.glb",
+        "sha256": "9418bff7889ae218b9dd2fd77db451d457ba50bb0c652b9ad363b724ed315c01"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/authoring.py",
+        "sha256": "cf3c942f27ee24a158c0bacc15718425cf42b6adf0ab9251a0352a0177adc690"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/contact-summary.json",
+        "sha256": "0c79342af8224ad287feaf872790866e507e8060bd9cdcf4479f532ad6d41bd4"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/lift-heavy-box/initial/editable.blend",
+        "sha256": "a33dc116a42e9c28d98ef4f61d34e70bfb1c0eece29caf9fdddbf5b7eb4c18fb"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip-1.9.png",
+        "sha256": "b3fea16c492865be9c8502fa7349d8350e6630e8658109a213682d1b59a1f39b"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip-3.8.png",
+        "sha256": "189174b25dce883e87774155dd37aaa7864d30a8aaa79c46cda3234ab82a48fb"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip-6.7.png",
+        "sha256": "74062204956e2f1bd90cef7201f66df9ae73898a67ed88576baab6ab7c9f404a"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip-realtime.mp4",
+        "sha256": "3cf0e43e5097ba7c7756a446a41947301b789dc351c39426a50c7ee71a208948"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip-rendering.json",
+        "sha256": "68dca0f4e859644d086874e8eaefd76eb9ea6fdb583d795b727e07a2696dbeac"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/grip.mp4",
+        "sha256": "78afc935a890478ee6493e7dd65175297e4d63ba395776e0dcfe0982d8621b2a"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/main-realtime.mp4",
+        "sha256": "71dca66a668b44c099884e0290265033175e4caf26c89c81b823d2190398989e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/main-rendering.json",
+        "sha256": "a75518d34e243284c61312848c140a1d0e3924a4bf4778a5fe96944a86725291"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/main.mp4",
+        "sha256": "3a7233b8ce0b0741a3754c442c72cf2f8ce4b01516d2035d5062385a0cc0dc9f"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/motion-samples.json",
+        "sha256": "8a0ec1aa0669f2a50968dfd36e1c85fe52097c9336b981f4b5a3643ee72ff792"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/preview-grip.json",
+        "sha256": "61458bbdec451c54de93bda43aacf446a9174e7e77d43c8955315118dfe461fb"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/production.json",
+        "sha256": "c1833eae2fa5663f955ba35776f4e1b494b5d1288c871f0337738026186ab6a1"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/recording.json",
+        "sha256": "1a08d5f51cd07949d667ddba2e6ee25d23d294a3d500ec00eb3d8c3902b2203a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/reimport-check.json",
+        "sha256": "f242e58e2e58ef87842a71eb6fb8f8d22ca786d4986b4ff81030f884810cef3c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/review-sheet.png",
+        "sha256": "f8aed140e8aaad2c9f2369c7b8bde8954f49648835cc4446f8ad017c468059c7"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/side-realtime.mp4",
+        "sha256": "823f09ee8c08c7915d931e17cb88c7a5f48c2cb011960ba55d63b71d22922513"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/side-rendering.json",
+        "sha256": "8161a58a7426214fa34fd001341e4d25dcc50b668ebd00c9293a3fca3defba7f"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/lift-heavy-box/initial/side.mp4",
+        "sha256": "2330b584a8f771c553fd96f1363949990f7f0d4d99168b02b4842aa855927078"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/video-contact-sheet-before-final-capture.png",
+        "sha256": "96af768dc3ecf9eb0bcb804f2723bc2dad1d6f5dc2cd3ee1a4816572b6b02d0a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/video-contact-sheet.png",
+        "sha256": "96af768dc3ecf9eb0bcb804f2723bc2dad1d6f5dc2cd3ee1a4816572b6b02d0a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/lift-heavy-box/initial/video-delivery.json",
+        "sha256": "c8916f2366507347846a7b74ff74db43e6df05698536e10276f468a430bcdb1d"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {
+        "export": {
+          "passed": true,
+          "evidence": "reimport-check.json：241 帧，17 骨，8.0 秒；最大关节回读误差 4.4e-07 m，道具误差 0 m。只证明导出回读一致性。"
+        }
+      },
+      "taste": {},
+      "remaining_issues": [
+        "箱底在 0.75 m 台面稳定后松手；手指未绑定，握持近景仍有局部网格穿插。",
+        "20 kg 重量感属于表演意图，尚无独立品味评分。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "issue": "导出前的 IK 可达检查发现部分姿势超出固定臂长。",
+      "change": "侧移末段让身体靠近台面。",
+      "actor": "GPT-6",
+      "rationale": "保留骨长；这些是首个可导出初稿之前的预演修正，不是已评价作品的对照。"
+    }
+  ],
+  "corrected": null,
+  "lessons": []
+}

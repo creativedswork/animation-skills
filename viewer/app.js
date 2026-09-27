@@ -269,9 +269,21 @@ class Viewport {
   }
 
   setCamera(mode) {
-    this.controls.target.set(0, 0.95, 0);
-    const positions = { perspective: [3.3, 2.6, -4.4], front: [0, 1.0, -5.4], side: [5.4, 1.0, 0] };
-    this.camera.position.set(...positions[mode]);
+    const id = this.task?.id;
+    const targets = {
+      'walk-turn-stop': [0.45, 0.95, -1.05], 'tired-walk': [0, 0.95, -1],
+      'wide-crate-transfer': [-0.4, 0.85, -0.15], 'lift-heavy-box': [0.4, 0.95, -0.2],
+      'axe-strike': [0, 1.1, -0.35],
+    };
+    const target = new THREE.Vector3(...(targets[id] || [0, 0.95, 0]));
+    const positions = { perspective: [3.0, 1.55, -4.1], front: [0, 0.05, -5.2], side: [5.8, 0.05, 0],
+      grip: [2.1, 0.9, -2.7], impact: [1.8, 0.65, -1.8] };
+    if (mode === 'grip') target.set(id === 'wide-crate-transfer' ? -0.4 : 0.45, 0.8, -0.35);
+    if (mode === 'impact') target.set(0, 0.65, -0.85);
+    const offset = new THREE.Vector3(...positions[mode]);
+    if (id === 'wide-crate-transfer' && ['perspective', 'grip'].includes(mode)) offset.x *= -1;
+    this.controls.target.copy(target);
+    this.camera.position.copy(target).add(offset);
     this.controls.update();
   }
 
@@ -333,6 +345,7 @@ function activeViews() { return comparing ? views : views.slice(0, 1); }
 
 function setPlaying(value) {
   playing = value && duration > 0;
+  if (playing) previousFrame = performance.now();
   $('#play').classList.toggle('playing', playing);
   $('#play').setAttribute('aria-label', playing ? '暂停' : '播放');
 }
@@ -419,7 +432,7 @@ async function selectCase(task) {
 }
 
 function frame(timestamp) {
-  const delta = previousFrame ? Math.min((timestamp - previousFrame) / 1000, 0.1) : 0;
+  const delta = previousFrame ? (timestamp - previousFrame) / 1000 : 0;
   previousFrame = timestamp;
   if (playing && duration) {
     time += delta * Number($('#speed').value);

@@ -1,0 +1,188 @@
+{
+  "id": "20260928-first-motion",
+  "case": "relief-transfer",
+  "status": "recording",
+  "fingerprints": {
+    "case": "71f2690f79fd03a0455c992e56383ac1bdf776855c436f0c1ecffa71fd375efd",
+    "skills": {
+      "character-body-mechanics": "4ee9e3cdbc6b257ec7f8ff4c964139393b27544a35f4fbf532397df1e10e5843",
+      "character-prop-interaction": "6ee59a4973077933130a65c47283530d916dd82695ca4df6bf0b6f6c38c0fe0f",
+      "character-acting": "de67176a1d1a0d8e6e3194fa3c1360263ddccf7dd314a83fe4a093afee243e92"
+    },
+    "inputs": {
+      "survivor-rig-glb": "f6245b2d87fdfa3740d610a435927d98f50c5fb8ae9e2a475920f469071e7edd"
+    }
+  },
+  "environment": {
+    "model": "GPT-6",
+    "harness": "TRAE agent; Blender CLI; Three.js viewer with Playwright/Chrome",
+    "blender": "5.1.1 (b70da489d7f4)",
+    "budget": "本地制作；未设固定时间或 token 预算；未调用收费生成。",
+    "usage": "0 次收费生成；未单独计量 token 和制作耗时。最终视频由逐帧采样合成，信息见各镜头 rendering.json；recording.json 为实时捕获诊断历史。"
+  },
+  "execution": {
+    "from_raw_inputs": true,
+    "human_artifact_edits": false,
+    "human_extra_guidance": false,
+    "notes": "用户要求制作剩余 7 例，没有提供关键帧、姿势或人工作品修改。本轮先从原始 GLB 制作宽箱与放松两个迁移案例，完成其初稿前未读取其他案例的成品关键帧或评价。复用原有坐标归一化与骨骼求解工具，并扩展双手 IK；各任务重新编写节拍和轨迹。同时读取全局 animated-character-pipeline 的通用资产、运动和验收参考；它未纳入三个被测 Skill 的包指纹。未复用输入 Idle、Walk、Chop。公开任务、同一 Agent 和同一骨架，不构成盲测或 Skill 效果对照实验。"
+  },
+  "initial": {
+    "artifacts": [
+      {
+        "role": "export",
+        "path": ".artifacts/production/relief-transfer/initial/animation.glb",
+        "sha256": "4bacf50e1e1a53172f3ea3e99152725d174fd93bd8e33b00010b441d4432964a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/authoring.py",
+        "sha256": "00ffe734004062266153420ed233331d6a284ace99d8e26a89d2fba10b0270c7"
+      },
+      {
+        "role": "blend",
+        "path": ".artifacts/production/relief-transfer/initial/editable.blend",
+        "sha256": "c24f996217da10ae60e059646814a435421231f6f176bf924181afb4d95e9487"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/main-capture.mp4",
+        "sha256": "0f82ba3461a761385428e59a1c334103588c520663dbded4defbe1f7f8f1c49b"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/main-first-take.mp4",
+        "sha256": "16161646babb544f78190f125761b2ca5e2372a41b62fb295788760de4920f1a"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/main-realtime.mp4",
+        "sha256": "9146cec89b2c00e3f38449d375a9e85969c6e54ac33a4b856bc0bdb810be670a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/main-rendering.json",
+        "sha256": "06b83fe9f129165865f4196e7f402a5c269562ea028fc255be2269d97735ba9e"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/main.mp4",
+        "sha256": "68696d52c2c04d1e161d55381f65f5000ecf0e1c97f3a263bdef07c7b9d76c4a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/motion-samples.json",
+        "sha256": "f20806e9e2ebb0779522069c0fa5c14143014394f4f2d3e840f489da0a137fd3"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/perspective-0.png",
+        "sha256": "7acbb59190b897fc558070452d5f5fecc2c5635e6c76f420939b2e6c0be39f18"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/perspective-2.png",
+        "sha256": "b7af94aabc8bd8db880ad9f703b9eb975d892baf131f1802288a7b0c423afb4f"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/perspective-3.png",
+        "sha256": "3d1af947be94584628c011d8e3d4390b9bd6e36307cdbee41a9e2104298b2be4"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/perspective-6.png",
+        "sha256": "b06086f4a9f53c5ef106e6fb02e85a56b400798de9dba4b6eeb3ada2287cb108"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/preview-perspective.json",
+        "sha256": "2778803c31c86c307c2222f05c1623f50bb5d0a5c9cbaa477ebe0c06281046fa"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/production.json",
+        "sha256": "ee0c9d5520de027849f5fd9d8de002269388b718731210ef32dc4eb052621985"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/recording-before-timing-fix.json",
+        "sha256": "1296be002cfb5e2b173eaa9f3d7dc828b9dacd4524b749100a1b5cf7ce5c55b9"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/recording-with-paused-lead.json",
+        "sha256": "b81634cf0ce9c6426da184b731cb0339f8e671d0ba1e0b310dfbd371246ef30e"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/recording.json",
+        "sha256": "9d0def4e561e8960ca4a94c67805ad14f1f95cd0b0995a7a8ef353f8d53ed05a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/reimport-check.json",
+        "sha256": "382dfefdcfa1af3501bbec7694fff4b910ddb560bec74f6f7e19df3090193407"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/review-sheet.png",
+        "sha256": "577bb52e81df4a0533721fd6933d3060c32648ff80c02cebd890eace40186302"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/rig.py",
+        "sha256": "f50d8767684ce098ed9a8ea4cd4279e4454d982dfba5e9beba83fc5f92aa5816"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/side-realtime.mp4",
+        "sha256": "317e2b925708b9e69da5e3df125a1bf7e08b12c24a12b9f8caa731c5c499a45c"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/side-rendering.json",
+        "sha256": "39d4b61fdf33d041bb1136f1d574ae467d00cb3a2298cde374bd7819fe0da1bd"
+      },
+      {
+        "role": "video",
+        "path": ".artifacts/production/relief-transfer/initial/side.mp4",
+        "sha256": "4a40a207440c57b20921b92a2a52b1f96b76dce30356fb072a2995f2ec22a3c4"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/video-contact-sheet-before-final-capture.png",
+        "sha256": "260114cb9e5a1636b01cd5f43feb41b0839b8f56a3dcbfea9eeb0ba6bf4746cf"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/video-contact-sheet.png",
+        "sha256": "bd3cb783b376aada5f7b7e8536f309ab02e462a21e15186df3c0880dc9696d8a"
+      },
+      {
+        "role": "other",
+        "path": ".artifacts/production/relief-transfer/initial/video-delivery.json",
+        "sha256": "9f10798f27e70508ce53351bd8f744fe72f98ed3b766c1a75bf7e44ca8aa8d2e"
+      }
+    ],
+    "review": {
+      "verdict": "pending",
+      "reviewer": "GPT-6（制作及技术检查；非独立品味评价者）",
+      "correctness": {},
+      "taste": {},
+      "remaining_issues": [
+        "头胸朝向、呼气与手臂松开已有预览；紧张转为安心的可辨认程度待独立评价。",
+        "待独立原速评价。骨骼与掌心指标不等于蒙皮接触或动作自然度通过；Skill 保持 draft。"
+      ]
+    }
+  },
+  "changes": [
+    {
+      "issue": "查看器截断帧间隔或沿用暂停前计时，录制器又晚于播放首帧启动，导致时长偏差或首帧缺失。",
+      "change": "修正查看器计时；实时录屏仍有丢帧，最终按任务帧率逐帧采样 GLB 并以同帧率编码。保留全部捕获历史。",
+      "actor": "GPT-6",
+      "rationale": "原速评分使用 main.mp4 等逐帧视频及 rendering 记录；realtime、first-take、capture 视频仅用于诊断。GLB 未修改。"
+    }
+  ],
+  "corrected": null,
+  "lessons": []
+}
