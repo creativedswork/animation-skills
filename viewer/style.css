@@ -115,10 +115,10 @@ h3 { font-size: 12px; font-weight: 550; }
   .sidebar { padding: 16px 18px 10px; border-right: 0; border-bottom: 1px solid var(--border); }
   .sidebar-heading { padding: 0 0 12px; }
   #search { margin-bottom: 10px; }
-  #case-list { display: flex; gap: 12px; overflow-x: auto; max-height: 126px; }
-  .case-group { display: flex; gap: 6px; margin: 0; }
+  #case-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .case-group { display: contents; }
   .group-name, .sidebar-note { display: none; }
-  .case-button { min-width: 190px; width: 190px; }
+  .case-button { min-width: 0; width: 100%; padding: 9px 6px; grid-template-columns: 18px minmax(0, 1fr); gap: 6px; }
   main { padding: 23px 18px; }
   .case-heading { margin-bottom: 18px; }
   .case-meta { font-size: 10px; }
@@ -134,6 +134,9 @@ h3 { font-size: 12px; font-weight: 550; }
   #speed { width: 63px; min-width: 63px; }
   .criteria-grid { grid-template-columns: 1fr; gap: 5px; }
   summary span { display: none; }
+}
+@media (max-width: 520px) {
+  #case-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: no-preference) {
   main { animation: appear 220ms ease-out; }
