@@ -158,7 +158,8 @@ class Viewport {
   async setCase(task) {
     this.task = task;
     this.modelSelect.replaceChildren(...task.models.map(model => option(model.id, model.label)));
-    const recorded = task.models.find(model => model.kind === 'initial' && model.available);
+    const available = task.models.filter(model => model.available && model.kind !== 'source');
+    const recorded = [...available].reverse().find(model => model.kind === 'corrected') || available.at(-1);
     this.modelSelect.value = recorded?.id || task.models[0]?.id || '';
     this.createContext(task);
     await this.loadChoice();
