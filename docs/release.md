@@ -1,6 +1,6 @@
 # 发布与安装
 
-当前版本为 `0.1.0-dev.2`，三个 Skill 均为草案。工程提供本地打包与发布前检查；尚未指定远端平台，也未上传 Release。
+当前版本为 `0.1.0-dev.2`，三个 Skill 均为草案。源码托管在 [creativedswork/animation-skills](https://github.com/creativedswork/animation-skills)，工程提供本地打包与发布前检查，尚未上传 GitHub Release。
 
 ## 预览包
 
@@ -54,7 +54,7 @@ git tag -a "v${release_version}" -m "Animation Skills ${release_version}"
 
 ## 上传远端
 
-先由维护者选择仓库、可见范围和分发条款，并配置 `origin`。本工程不选择托管平台。已有 Git 远端后，可以推送当前发布提交和标签：
+源码仓库使用 GitHub；从官方地址克隆时，`origin` 已指向 `creativedswork/animation-skills`。维护者完成上述正式版本检查后，可以推送发布提交和标签：
 
 ```bash
 git push origin main "v${release_version}"

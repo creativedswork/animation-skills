@@ -38,7 +38,7 @@ blender --background --factory-startup --disable-autoexec \
 
 `trial-02` 是本轮记录 ID 和输出目录名，重跑时换成未使用的名字。脚本生成 `.artifacts/production/sit-stand/trial-02/editable.blend` 与 `animation.glb`，保留模型、材质、骨架和新制作的动作；视频录制与评价另行执行。
 
-启动 `make viewer`，打开 `http://127.0.0.1:8765`，点击“载入 GLB”选择新生成的 `animation.glb` 即可播放。首次安装查看器依赖先运行 `npm ci`。已有登记的作品可直接在案例素材列表中选择。
+启动 `make viewer`，打开 `http://127.0.0.1:8765`，将新生成的 `animation.glb` 拖入视图，或点击“载入 GLB”选择文件，再点击播放。开启“双视图”后可分别向 A、B 拖入初稿与修正版。首次安装查看器依赖先运行 `npm ci`。已登记且本地文件完整的作品可直接在案例素材列表中选择；克隆仓库不包含 `.artifacts/` 中的历史文件。
 
 临时载入不会修改运行记录。要让新作品长期出现在对应案例的素材列表中，在 `cases/sit-stand/runs/trial-02.json` 的 `initial.artifacts` 中登记 `role=export`、GLB 的仓库相对 `path` 和实际 `sha256`，再执行 `python3 tools/project.py check --artifacts`，刷新页面并选择该记录。用 `shasum -a 256 <文件路径>` 可取得文件指纹。完整记录还需工程、录像和实际评价；格式见 [工程约定](../docs/engineering.md)。
 

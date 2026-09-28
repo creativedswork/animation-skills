@@ -22,6 +22,14 @@ const order = Object.keys(shortNames);
 let cases = [], currentCase, time = 0, duration = 0, playing = false, previousFrame = 0;
 let comparing = false, cameraMode = 'perspective';
 const views = [];
+const hasFiles = event => Array.from(event.dataTransfer?.types || []).includes('Files');
+
+// Keep files dropped outside a viewport from replacing the page.
+for (const type of ['dragover', 'drop']) document.addEventListener(type, event => {
+  if (!hasFiles(event)) return;
+  event.preventDefault();
+  if (!event.target.closest('.viewport')) event.dataTransfer.dropEffect = 'none';
+});
 
 function option(value, label) {
   const node = document.createElement('option');
@@ -99,24 +107,59 @@ class Viewport {
     }).observe($('.canvas-wrap', element));
     this.modelSelect.addEventListener('change', () => this.loadChoice());
     this.clipSelect.addEventListener('change', () => this.selectClip(this.clipSelect.value));
-    $('.file-input', element).addEventListener('change', async event => {
+    $('.file-input', element).addEventListener('change', event => {
       const file = event.target.files[0];
-      if (!file) return;
-      const epoch = this.beginLoad();
-      try {
-        if (!file.name.toLowerCase().endsWith('.glb')) throw new Error('请选择 GLB 文件');
-        const gltf = await loader.parseAsync(await file.arrayBuffer(), '');
-        if (epoch !== this.epoch) { dispose(gltf.scene); return; }
-        this.modelSelect.querySelector('[value="local"]')?.remove();
-        this.modelSelect.append(option('local', file.name));
-        this.modelSelect.value = 'local';
-        this.showModel(gltf, { kind: 'local', label: file.name, verdict: 'pending' }, true);
-      } catch (error) {
-        if (epoch === this.epoch) this.fail('GLB 无法读取，请重新选择有效文件。');
-        console.error(error);
-      }
       event.target.value = '';
+      if (file) this.loadFile(file);
     });
+    let dragDepth = 0;
+    element.addEventListener('dragenter', event => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+      dragDepth += 1;
+      element.classList.add('drag-over');
+    });
+    element.addEventListener('dragover', event => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = 'copy';
+    });
+    element.addEventListener('dragleave', event => {
+      if (!hasFiles(event)) return;
+      dragDepth = Math.max(0, dragDepth - 1);
+      if (!dragDepth) element.classList.remove('drag-over');
+    });
+    element.addEventListener('drop', event => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+      dragDepth = 0;
+      element.classList.remove('drag-over');
+      if (event.dataTransfer.files.length !== 1) {
+        this.beginLoad();
+        this.fail('每个视图一次载入一个 GLB 文件，请重新拖入。');
+        return;
+      }
+      this.loadFile(event.dataTransfer.files[0]);
+    });
+  }
+
+  async loadFile(file) {
+    const epoch = this.beginLoad();
+    if (!file.name.toLowerCase().endsWith('.glb')) {
+      this.fail('仅支持 GLB 文件，请重新拖入或选择 .glb 文件。');
+      return;
+    }
+    try {
+      const gltf = await loader.parseAsync(await file.arrayBuffer(), '');
+      if (epoch !== this.epoch) { dispose(gltf.scene); return; }
+      this.modelSelect.querySelector('[value="local"]')?.remove();
+      this.modelSelect.append(option('local', file.name));
+      this.modelSelect.value = 'local';
+      this.showModel(gltf, { kind: 'local', label: file.name, verdict: 'pending' }, true);
+    } catch (error) {
+      if (epoch === this.epoch) this.fail('GLB 无法读取，请重新拖入或选择有效文件。');
+      console.error(error);
+    }
   }
 
   beginLoad() {

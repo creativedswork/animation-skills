@@ -50,13 +50,14 @@
           <div class="viewport-toolbar">
             <span class="view-letter">A</span>
             <select class="model-select" aria-label="视图 A 素材"></select>
-            <label class="file-button" title="仅在浏览器中读取，不上传文件">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 A 载入本地 GLB"></label>
+            <label class="file-button" title="选择文件或拖入视图，仅在本地读取">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 A 载入本地 GLB"></label>
           </div>
           <div class="canvas-wrap">
             <canvas aria-label="视图 A 三维角色"></canvas>
             <div class="canvas-status" role="status">正在加载模型……</div>
             <span class="view-origin">源素材</span>
             <span class="axis-label">Y ↑</span>
+            <div class="drop-hint">松开以在视图 A 载入 GLB</div>
           </div>
           <div class="clip-toolbar"><label>动作<select class="clip-select" aria-label="视图 A 动作"><option value="">绑定姿势</option></select></label><span class="clip-duration"></span></div>
         </section>
@@ -64,13 +65,14 @@
           <div class="viewport-toolbar">
             <span class="view-letter">B</span>
             <select class="model-select" aria-label="视图 B 素材"></select>
-            <label class="file-button" title="仅在浏览器中读取，不上传文件">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 B 载入本地 GLB"></label>
+            <label class="file-button" title="选择文件或拖入视图，仅在本地读取">载入 GLB<input class="file-input" type="file" accept=".glb" aria-label="视图 B 载入本地 GLB"></label>
           </div>
           <div class="canvas-wrap">
             <canvas aria-label="视图 B 三维角色"></canvas>
             <div class="canvas-status" role="status">正在加载模型……</div>
             <span class="view-origin">源素材</span>
             <span class="axis-label">Y ↑</span>
+            <div class="drop-hint">松开以在视图 B 载入 GLB</div>
           </div>
           <div class="clip-toolbar"><label>动作<select class="clip-select" aria-label="视图 B 动作"><option value="">绑定姿势</option></select></label><span class="clip-duration"></span></div>
         </section>
@@ -86,7 +88,7 @@
         <select id="speed" aria-label="播放速度"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
         <label class="check-control loop-control"><input id="loop" type="checkbox" checked>循环</label>
       </div>
-      <div class="viewer-notes"><p id="source-note">当前演示固定输入，案例动作尚未制作。</p><span>拖拽旋转 · 滚轮缩放</span></div>
+      <div class="viewer-notes"><p id="source-note">当前演示固定输入，案例动作尚未制作。</p><span>拖入 GLB · 拖拽旋转 · 滚轮缩放</span></div>
       <details class="task-details">
         <summary>任务要求与评价标准<span>查看完整制作要求</span></summary>
         <p id="task-prompt"></p>
