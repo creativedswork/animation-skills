@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0-dev.1",
+  "version": "0.1.0-dev.2",
   "skills": [
     {"name": "character-body-mechanics", "maturity": "draft"},
     {"name": "character-prop-interaction", "maturity": "draft"},
